@@ -23,7 +23,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function Todos({ todos }) {
+export default function Finished({ todos }) {
   const router = useRouter();
   const handleFinish = async (item) => {
     try {
@@ -38,10 +38,10 @@ export default function Todos({ todos }) {
     }
   };
 
-  const uncompletedTodos = todos.filter((todo) => !todo.finished);
+  const uncompletedTodos = todos.filter((todo) => todo.finished);
   return (
     <div className={styles.container}>
-      <h1>Tarefas para fazer</h1>
+      <h1>Tarefas concluídas</h1>
       {uncompletedTodos.map((todo) => (
         <ul key={todo.id}>
           <li>
@@ -58,12 +58,6 @@ export default function Todos({ todos }) {
             <div>
               <button onClick={() => handleDelete(todo)}>
                 <DeleteIcon className={`${styles.icons} ${styles.deleteIcon}`} />
-              </button>
-              <Link href={`/todos/edit/${todo.id}`}>
-                <EditIcon className={`${styles.icons} ${styles.editIcon}`} />
-              </Link>
-              <button onClick={() => handleFinish(todo)}>
-                <CheckCircleIcon className={`${styles.icons} ${styles.checkIcon}`} />
               </button>
             </div>
           </li>

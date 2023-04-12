@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function CreateObject() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,9 +16,10 @@ export default function CreateObject() {
     };
 
     axios
-      .post("http://localhost:8000/create", data)
+      .post(`${process.env.API_URL}/create`, data)
       .then((response) => {
         console.log(response.data);
+        router.push(`/todos/`);
       })
       .catch((error) => {
         console.log(error);

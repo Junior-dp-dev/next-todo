@@ -1,11 +1,69 @@
-.todolist {
-  list-style: none;
-  width: 500px;
-  margin: 1rem auto;
+.container {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 0 20rem;
+  min-width: 600px;
 }
 
-.todolist li {
+.container h1 {
+  font-size: 40px;
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+  border: solid 1px #a0b7bb;
+}
+
+.container ul {
+  list-style: none;
+}
+
+.container li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: solid 1px #a0b7bb;
+}
+
+.link {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+}
+.lineThrough {
+  text-decoration: line-through;
+}
+
+.icons {
+  margin-right: 0.2rem;
+}
+
+.deleteIcon {
+  color: rgb(231, 35, 35);
+}
+.editIcon {
+  color: rgb(218, 169, 106);
+}
+.checkIcon {
+  color: rgb(42, 136, 42);
+}
+.container li h2 {
+  color: black;
+  font-size: 32px;
+  margin-left: 1rem;
+}
+
+.container li p {
+  color: rgb(85, 85, 85);
+  font-size: 16px;
+  margin-left: 1rem;
+}
+
+.container button {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
 }

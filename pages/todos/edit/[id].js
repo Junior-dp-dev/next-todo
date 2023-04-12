@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 export async function getStaticPaths() {
-  const { data } = await axios.get("http://localhost:8000");
+  const { data } = await axios.get(`${process.env.API_URL}`);
   const paths = data.map((item) => ({
     params: { id: item.id.toString() },
   }));
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { id } = params;
-  const { data } = await axios.get(`http://localhost:8000/read/${id}`);
+  const { data } = await axios.get(`${process.env.API_URL}/read/${id}`);
   return { props: { item: data } };
 }
 
@@ -25,7 +25,7 @@ export default function EditPage({ item }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/update/${item.id}`, {
+      await axios.put(`${process.env.API_URL}/update/${item.id}`, {
         title,
         content,
       });
@@ -50,7 +50,7 @@ export default function EditPage({ item }) {
         </div>
         <button type="submit">Salvar</button>
         <button>
-          <Link href={`http://localhost:3000/todos/${item.id}`}>Cancelar</Link>
+          <Link href={`/todos/${item.id}`}>Cancelar</Link>
         </button>
       </form>
     </>

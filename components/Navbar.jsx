@@ -8,10 +8,13 @@ export default function Navbar() {
         <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/todos">ToDos</Link>
+        <Link href="/create">Criar</Link>
       </li>
       <li>
-        <Link href="/create">Create</Link>
+        <Link href="/todos">A fazer</Link>
+      </li>
+      <li>
+        <Link href="/todos/finished">Concluídos</Link>
       </li>
       <li>
         <Link href="/about">Sobre</Link>
