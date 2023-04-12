@@ -1,0 +1,8 @@
+.footer {
+  background-color: black;
+  color: aquamarine;
+  height: 16vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
