@@ -1,12 +1,11 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import styles from "@/styles/MainContainer.module.css";
 
 export default function MainContainer({ children }) {
   return (
     <>
       <Navbar />
-      <div className={styles.container}>{children}</div>
+      <div className="min-h-vh90 text-center font-handlee">{children}</div>
       <Footer />
     </>
   );
