@@ -1,4 +1,3 @@
-import styles from "@/styles/Home.module.css";
 import Head from "next/head";
 
 export default function Home() {
@@ -10,13 +9,15 @@ export default function Home() {
         <meta name="description" content="Não esqueça de mais nada!" />
       </Head>
       <div>
-        <h1 className={styles.title}>Bem vindo</h1>
-        <form className={styles.container}>
+        <h1 className="text-3xl font-bold">Bem vindo</h1>
+        <form className="flex flex-col items-center gap-2 mt-5">
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+          <input className="border border-black" type="email" id="email" name="email" required />
           <label htmlFor="password">Senha:</label>
-          <input type="password" id="password" name="password" required />
-          <input type="submit" value="Enviar" />
+          <input className="border border-black" type="password" id="password" name="password" required />
+          <button className="border border-black hover:bg-gray-100 px-2 rounded mt-5" type="submit">
+            Enviar
+          </button>
         </form>
       </div>
     </>

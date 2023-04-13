@@ -41,11 +41,11 @@ export default function Todos({ todos }) {
   const uncompletedTodos = todos.filter((todo) => !todo.finished);
   return (
     <div className={styles.container}>
-      <h1>Tarefas para fazer</h1>
+      <h1 className="font-handlee">Tarefas para fazer</h1>
       {uncompletedTodos.map((todo) => (
         <ul key={todo.id}>
           <li>
-            <Link className={styles.link} href={`/todos/${todo.id}`}>
+            <Link className="flex items-baseline" href={`/todos/${todo.id}`}>
               <h2>
                 {todo.id})&nbsp; {todo.title.slice(0, 20)}
                 {todo.title.length > 20 ? "..." : ""}
@@ -55,15 +55,15 @@ export default function Todos({ todos }) {
                 {todo.content.length > 8 ? "..." : ""}
               </p>
             </Link>
-            <div>
+            <div className="flex gap-1.5 mr-2">
               <button onClick={() => handleDelete(todo)}>
-                <DeleteIcon className={`${styles.icons} ${styles.deleteIcon}`} />
+                <DeleteIcon className="text-red-600" />
               </button>
               <Link href={`/todos/edit/${todo.id}`}>
-                <EditIcon className={`${styles.icons} ${styles.editIcon}`} />
+                <EditIcon className="text-orange-400" />
               </Link>
               <button onClick={() => handleFinish(todo)}>
-                <CheckCircleIcon className={`${styles.icons} ${styles.checkIcon}`} />
+                <CheckCircleIcon className="text-green-600" />
               </button>
             </div>
           </li>

@@ -57,7 +57,7 @@ export default function Finished({ todos }) {
             </Link>
             <div>
               <button onClick={() => handleDelete(todo)}>
-                <DeleteIcon className={`${styles.icons} ${styles.deleteIcon}`} />
+                <DeleteIcon className={`${styles.icons} ${styles.deleteIconn}`} />
               </button>
             </div>
           </li>
