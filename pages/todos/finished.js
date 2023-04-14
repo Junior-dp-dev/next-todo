@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { handleDelete } from "../../components/DeleteApi";
@@ -48,33 +49,38 @@ export default function Finished({ todos }) {
     { title: "A fazer", content: "conteudo", id: 9 },
   ];
   return (
-    <div className=" flex flex-col min-h-vh90 justify-center items-center gap-2 py-5">
-      <h1 className="p-5 min-w-600 text-3xl font-bold border border-sky-500">Tarefas concluídas</h1>
-      {uncompletedTodos.map((todo) => (
-        <ul key={todo.id} className=" p-4 min-w-600 border border-sky-500">
-          <li className="flex  justify-between">
-            <Link className="flex items-baseline gap-2" href={`/todos/${todo.id}`}>
-              <h2 className="text-3xl">
-                {todo.id})&nbsp; {todo.title.slice(0, 20)}
-                {todo.title.length > 20 ? "..." : ""}
-              </h2>
-              <p className=" from-neutral-500">
-                {todo.content.slice(0, 8)}
-                {todo.content.length > 8 ? "..." : ""}
-              </p>
-            </Link>
-            <div>
-              <button
-                onClick={() => {
-                  router.push(`/todos/`);
-                  handleDelete(todo);
-                }}>
-                <DeleteIcon className="text-red-600" />
-              </button>
-            </div>
-          </li>
-        </ul>
-      ))}
-    </div>
+    <>
+      <Head>
+        <title>Concluídas</title>
+      </Head>
+      <div className=" flex flex-col min-h-vh90 justify-center items-center gap-2 py-5">
+        <h1 className="p-5 min-w-600 text-3xl font-bold border border-sky-500">Tarefas concluídas</h1>
+        {uncompletedTodos.map((todo) => (
+          <ul key={todo.id} className=" p-4 min-w-600 border border-sky-500">
+            <li className="flex  justify-between">
+              <Link className="flex items-baseline gap-2" href={`/todos/${todo.id}`}>
+                <h2 className="text-3xl">
+                  {todo.id})&nbsp; {todo.title.slice(0, 20)}
+                  {todo.title.length > 20 ? "..." : ""}
+                </h2>
+                <p className="from-neutral-500">
+                  {todo.content.slice(0, 8)}
+                  {todo.content.length > 8 ? "..." : ""}
+                </p>
+              </Link>
+              <div>
+                <button
+                  onClick={() => {
+                    router.push(`/todos/`);
+                    handleDelete(todo);
+                  }}>
+                  <DeleteIcon className="text-red-600" />
+                </button>
+              </div>
+            </li>
+          </ul>
+        ))}
+      </div>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   // Aqui você faz a requisição para obter os IDs dos seus itens
@@ -22,6 +23,9 @@ export async function getStaticProps({ params }) {
 export default function ItemPage({ item }) {
   return (
     <>
+      <Head>
+        <title>{item.title}</title>
+      </Head>
       <h1>{item.title}</h1>
       <p>{item.content}</p>
       <button>

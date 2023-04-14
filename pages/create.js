@@ -1,6 +1,8 @@
 import axios from "axios";
+import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import FormTodo from "./../components/FormTodo";
 
 export default function CreateObject() {
   const [title, setTitle] = useState("");
@@ -27,16 +29,11 @@ export default function CreateObject() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Título:
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      </label>
-      <label>
-        Conteúdo:
-        <textarea value={content} onChange={(e) => setContent(e.target.value)} />
-      </label>
-      <button type="submit">Enviar</button>
-    </form>
+    <>
+      <Head>
+        <title>Criar Nota</title>
+      </Head>
+      <FormTodo titleText="Nova Nota" handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
+    </>
   );
 }
