@@ -9,9 +9,15 @@ import Head from "next/head";
 
 export async function getStaticProps() {
   try {
-    const response = await axios.get(`${process.env.API_URL}`);
+    const token = localStorage.getItem("api");
+    console.log("O TOKEN PEGO É: " + token);
+    const response = await axios.get(`${process.env.API_URL}/api/notes`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const todos = response.data;
-    console.log(todos);
+    console.log("Essas são as notas:" + todos);
     return {
       props: { todos },
     };
@@ -38,18 +44,7 @@ export default function Todos({ todos }) {
     }
   };
 
-  /* const uncompletedTodos = todos.filter((todo) => !todo.finished); */
-  const uncompletedTodos = [
-    { title: "A fazer", content: "conteudo", id: 1 },
-    { title: "A fazer", content: "conteudo", id: 2 },
-    { title: "A fazeraaaaassssssssssssssaaaa", content: "conteudoooooooooooooooo", id: 3 },
-    { title: "A fazer", content: "conteudo", id: 4 },
-    { title: "A fazer", content: "conteudo", id: 5 },
-    { title: "A fazer", content: "conteudo", id: 6 },
-    { title: "A fazer", content: "conteudo", id: 7 },
-    { title: "A fazer", content: "conteudo", id: 8 },
-    { title: "A fazer", content: "conteudo", id: 9 },
-  ];
+  const uncompletedTodos = todos.filter((todo) => !todo.finished);
   return (
     <>
       <Head>

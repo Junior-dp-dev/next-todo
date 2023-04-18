@@ -1,13 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import PrivateRoute from "../components/PrivateRoute";
 
 export default function About() {
   const front = "<Frontend/>";
   const back = "<Backend/>";
 
   return (
-    <>
+    <PrivateRoute>
       <Head>
         <title>Sobre</title>
       </Head>
@@ -49,6 +50,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </>
+    </PrivateRoute>
   );
 }
