@@ -3,7 +3,7 @@ import Router, { useRouter } from "next/router";
 export default function Footer() {
   const router = useRouter();
 
-  if (router.pathname === "/") {
+  if (router.pathname === "/" || router.pathname === "/register" || router.pathname === "/login") {
     return null;
   }
 

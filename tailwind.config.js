@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
+      sans: ["Segoe UI", "Helvetica", "Arial", "sans-serif"],
       caveat: ["Caveat", "cursive"],
       handlee: ["Handlee", "cursive"],
       kalam: ["Kalam", "cursive"],
