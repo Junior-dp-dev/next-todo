@@ -1,7 +1,7 @@
 import React from "react";
 
-function NovaNotaForm(props) {
-  const { titleText, handleSubmit, title, setTitle, content, setContent } = props;
+function FormNote(props) {
+  const { titleText, buttonText, handleSubmit, title, setTitle, content, setContent } = props;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col min-h-vh90 justify-center items-center gap-4">
@@ -15,10 +15,10 @@ function NovaNotaForm(props) {
         <textarea className="border border-stone-500  w-80" defaultValue={content} onChange={(e) => setContent(e.target.value)} />
       </div>
       <button className="border font-bold border-black hover:bg-gray-100 px-6 py-1 rounded" type="submit">
-        Enviar
+        {buttonText}
       </button>
     </form>
   );
 }
 
-export default NovaNotaForm;
+export default FormNote;

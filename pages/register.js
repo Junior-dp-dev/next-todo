@@ -69,12 +69,12 @@ export default function Register() {
   return (
     <>
       <Head>
-        <title>Início</title>
+        <title>Register</title>
         <meta name="keywords" content="TodoList, Lista de Afazeres" />
         <meta name="description" content="Não esqueça de mais nada!" />
       </Head>
-      <div className="flex h-max ">
-        <div className="h-screen w-screen flex flex-col justify-center">
+      <div className="flex flex-col justify-center items-center h-screen w-screen bg-[url('/images/todo4.jpg')] bg-no-repeat bg-center bg-cover">
+        <div className="px-20 py-28 min-w-full  flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
           <h1 className="text-4xl font-bold text-blue-500">Sign In</h1>
           <form className="flex flex-col items-center gap-5 m-5" onSubmit={handleSubmit}>
             <div className="border rounded-full w-60 h-10 flex pl-3 gap-2 items-center border-black">
@@ -98,6 +98,9 @@ export default function Register() {
             Voltar
           </Link>
         </div>
+        <Link className=" text-white font-bold drop-shadow-[0_3px_2px_rgba(0,0,0,1)] mt-5" href={"/about"}>
+          Sobre Nós
+        </Link>
       </div>
     </>
   );

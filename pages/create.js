@@ -2,7 +2,8 @@ import axios from "axios";
 import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import FormTodo from "./../components/FormTodo";
+import { getToken } from "../utils/auth";
+import FormNote from "@/components/FormNote";
 
 export default function CreateObject() {
   const [title, setTitle] = useState("");
@@ -12,16 +13,21 @@ export default function CreateObject() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const token = getToken();
     const data = {
       title: title,
       content: content,
     };
 
     axios
-      .post(`${process.env.API_URL}/create`, data)
+      .post(`${process.env.API_URL}/api/notes/add/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
-        router.push(`/todos/`);
+        router.push(`/notes/`);
       })
       .catch((error) => {
         console.log(error);
@@ -33,7 +39,7 @@ export default function CreateObject() {
       <Head>
         <title>Criar Nota</title>
       </Head>
-      <FormTodo titleText="Nova Nota" handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
+      <FormNote titleText={"Nova Nota"} buttonText={"Criar"} handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
     </>
   );
 }

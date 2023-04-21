@@ -1,18 +1,18 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import EditNoteForm from "../EditNoteForm";
+import Note from "../../components/Note";
 
-export default function EditNote() {
+export default function NoteId() {
   const router = useRouter();
   const { id } = router.query;
 
   return (
     <>
       <Head>
-        <title>Editar Nota</title>
+        <title>Nota {id}</title>
       </Head>
       <div>
-        <EditNoteForm noteId={id} />
+        <Note noteId={id} />
       </div>
     </>
   );
