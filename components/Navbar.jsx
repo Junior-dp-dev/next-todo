@@ -15,20 +15,20 @@ export default function Navbar() {
   }
 
   return (
-    <ul className="flex bg-black text-white font-handlee gap-10  min-h-p60 pl-5 items-center">
-      <li className="hover:text-cyan-600">
+    <ul className="flex text-white font-bold text-2xl  font-handlee gap-10  min-h-p60 pl-5 items-center bg-[url('/images/todo4.jpg')] ">
+      <li className="hover:text-yellow-400 drop-shadow-lg">
         <Link href="/create">Criar</Link>
       </li>
-      <li className="hover:text-cyan-600">
-        <Link href="/notes">A fazer</Link>
+      <li className="hover:text-yellow-400 drop-shadow-lg">
+        <Link href="/notes">Notas</Link>
       </li>
-      <li className="hover:text-cyan-600">
+      <li className="hover:text-yellow-400 drop-shadow-lg">
         <Link href="/notesFinished">Concluídos</Link>
       </li>
-      <li className="hover:text-cyan-600">
+      <li className="hover:text-yellow-400 drop-shadow-lg">
         <Link href="/about">Sobre</Link>
       </li>
-      <li>
+      <li className=" hover:text-yellow-400 drop-shadow-lg">
         <button onClick={handleLogout}>Logout</button>
       </li>
     </ul>

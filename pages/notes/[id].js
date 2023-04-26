@@ -8,9 +8,6 @@ export default function NoteId() {
 
   return (
     <>
-      <Head>
-        <title>Nota {id}</title>
-      </Head>
       <div>
         <Note noteId={id} />
       </div>

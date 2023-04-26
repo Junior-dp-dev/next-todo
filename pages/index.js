@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import axios from "axios";
-import { setToken, getToken, removeToken } from "../utils/auth";
+import { setToken, getToken } from "../utils/auth";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -24,7 +24,7 @@ export default function Home() {
 
   const login = (username, password) => {
     return axios
-      .post("http://localhost:8000/api/token/", {
+      .post(`${process.env.API_URL}/api/token/`, {
         username: username,
         password: password,
       })
@@ -39,7 +39,6 @@ export default function Home() {
         console.log(error);
         if (error.response && error.response.status === 401) {
           // Erro de autenticação
-          removeToken();
           setError("Usuário ou senha incorretos.");
         } else {
           // Outro tipo de erro

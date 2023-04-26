@@ -4,11 +4,23 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { getToken } from "../utils/auth";
 import FormNote from "@/components/FormNote";
+import { GetOne } from "../components/GetOne";
+import { useEffect } from "react";
 
 export default function CreateObject() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    GetOne(27)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
