@@ -60,7 +60,7 @@ export default function Home() {
     login(username, password).then((token) => {
       console.log("Login bem-sucedido");
       if (token) {
-        router.push("/about"); // redireciona para outra página
+        router.push("/notes"); // redireciona para outra página
       }
     });
   };

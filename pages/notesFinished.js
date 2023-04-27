@@ -4,6 +4,10 @@ import Head from "next/head";
 import { getToken } from "../utils/auth";
 import { useRouter } from "next/router";
 import { NoteFinished } from "@/components/BoxNote";
+import Link from "next/link";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+
+import PrivateRoute from "@/components/PrivateRoute";
 
 export default function Lista() {
   const [notes, setNotes] = useState([]);
@@ -36,12 +40,20 @@ export default function Lista() {
 
   const uncompletedTodos = notes.filter((note) => note.finished);
   return (
-    <>
+    <PrivateRoute>
       <Head>
         <title>Concluídos</title>
       </Head>
-      {/*  <BoxNote notes={uncompletedTodos} handleDelete={handleDelete} handleFinish={handleFinish} finished={true} /> */}
-      <NoteFinished notes={uncompletedTodos} getNotes={getNotes} />
-    </>
+      {notes.length !== 0 ? (
+        <NoteFinished notes={uncompletedTodos} getNotes={getNotes} />
+      ) : (
+        <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
+          <h1 className=" text-5xl  font-bold">Conclua suas notas!</h1>
+          <Link href={"/notes"}>
+            <CheckBoxIcon className="text-5xl text-green-500" />
+          </Link>
+        </div>
+      )}
+    </PrivateRoute>
   );
 }

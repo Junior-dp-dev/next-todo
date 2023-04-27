@@ -104,7 +104,7 @@ export function Note(props) {
   return (
     <div className="min-h-vh90 ">
       <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-green-500">Tarefas para fazer</h1>
-      <div className="flex gap-5 flex-wrap justify-center px-5">
+      <div className="flex gap-5 flex-wrap justify-center px-5 mb-10">
         {notes.map((note) => (
           <div key={note.id} className="flex text-left flex-col w-[28rem] border-4 border-sky-500 rounded-xl">
             <h2 className=" font-bold text-4xl px-4 pt-3 pb-2">
@@ -137,7 +137,7 @@ export function NoteFinished(props) {
   return (
     <div className="min-h-vh90 ">
       <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-green-500">Tarefas para fazer</h1>
-      <div className="flex gap-5 flex-wrap justify-center px-5">
+      <div className="flex gap-5 flex-wrap justify-center px-5 mb-5">
         {notes.map((note) => (
           <div key={note.id} className="flex text-left flex-col w-[28rem] border-4 border-sky-500 rounded-xl">
             <h2 className=" font-bold text-4xl px-4 pt-3 pb-2">

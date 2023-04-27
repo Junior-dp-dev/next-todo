@@ -13,5 +13,3 @@ export const getToken = () => {
 export const removeToken = () => {
   Cookies.remove(TOKEN_KEY);
 };
-
-//Admin5277

@@ -6,6 +6,7 @@ import { getToken } from "../utils/auth";
 import FormNote from "@/components/FormNote";
 import { GetOne } from "../components/GetOne";
 import { useEffect } from "react";
+import PrivateRoute from "@/components/PrivateRoute";
 
 export default function CreateObject() {
   const [title, setTitle] = useState("");
@@ -47,11 +48,11 @@ export default function CreateObject() {
   };
 
   return (
-    <>
+    <PrivateRoute>
       <Head>
         <title>Criar Nota</title>
       </Head>
       <FormNote titleText={"Nova Nota"} buttonText={"Criar"} handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
-    </>
+    </PrivateRoute>
   );
 }

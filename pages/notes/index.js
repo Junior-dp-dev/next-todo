@@ -3,6 +3,9 @@ import { getToken } from "../../utils/auth";
 import axios from "axios";
 import Head from "next/head";
 import { Note } from "@/components/BoxNote";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import Link from "next/link";
+import PrivateRoute from "@/components/PrivateRoute";
 
 export default function Lista() {
   const [notes, setNotes] = useState([]);
@@ -34,11 +37,20 @@ export default function Lista() {
 
   const uncompletedTodos = notes.filter((note) => !note.finished);
   return (
-    <>
+    <PrivateRoute>
       <Head>
         <title>Notas</title>
       </Head>
-      <Note notes={uncompletedTodos} getNotes={getNotes} />
-    </>
+      {notes.length !== 0 ? (
+        <Note notes={uncompletedTodos} getNotes={getNotes} />
+      ) : (
+        <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
+          <h1 className=" text-5xl  font-bold">Crie sua primeira nota!</h1>
+          <Link href={"/create"}>
+            <AddCircleOutlineIcon className="text-5xl text-sky-500" />
+          </Link>
+        </div>
+      )}
+    </PrivateRoute>
   );
 }

@@ -1,17 +1,21 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import PrivateRoute from "../components/PrivateRoute";
 
 export default function About() {
   const front = "<Frontend/>";
   const back = "<Backend/>";
 
   return (
-    <PrivateRoute>
+    <>
       <Head>
         <title>Sobre</title>
       </Head>
+      <ul className="flex text-white font-bold text-2xl  font-handlee py-2 pl-10  bg-[url('/images/todo4.jpg')] ">
+        <li className="hover:text-green-100 drop-shadow-lg">
+          <Link href="/notes">Voltar</Link>
+        </li>
+      </ul>
       <div className="p-10 justify-center flex flex-col gap-10 min-h-vh90">
         <div className="text-2xl">
           <h1 className=" font-bold text-4xl">Conheça um pouco mais sobre as pessoas que estão por trás deste projeto. </h1>
@@ -21,16 +25,16 @@ export default function About() {
             em contato conosco. Estamos ansiosos para ouvir a sua opinião!
           </p>
         </div>
-        <div className="flex justify-evenly text-2xl">
+        <div className="flex justify-center text-2xl">
           <div className=" w-96 flex flex-col items-center gap-2">
             <Image className=" border-2 border-black rounded-full" src="/images/Junior.jpg" alt="Foto Junior" width={200} height={200} />
             <h1>Junior de Paula</h1>
             <p>{front}</p>
             <div className="mt-5">
-              <Link className=" hover:bg-purple-200 border-2 rounded-full border-purple-600 px-5 py-1 mx-3" href="/about">
+              <Link className=" hover:bg-purple-200 border-2 rounded-full border-purple-600 px-5 pt-1 mx-3" href="https://github.com/Junior-dp-dev" target="_blank">
                 Github
               </Link>
-              <Link className=" hover:bg-blue-200 border-2 rounded-full border-blue-600 px-5 py-1 mx-3" href="/about">
+              <Link className=" hover:bg-blue-200 border-2 rounded-full border-blue-600 px-5 pt-1 mx-3" href="https://www.linkedin.com/in/junior-de-paula-1b7091262/" target="_blank">
                 Linkedin
               </Link>
             </div>
@@ -40,16 +44,19 @@ export default function About() {
             <h1>César Augusto</h1>
             <p>{back}</p>
             <div className="mt-5">
-              <Link className=" hover:bg-purple-200 border-2 rounded-full border-purple-600 px-5 py-1 mx-3" href="/about">
+              <Link className=" hover:bg-purple-200 border-2 rounded-full border-purple-600 px-5 pt-1 mx-3" href="https://github.com/KisarDev" target="_blank">
                 Github
               </Link>
-              <Link className=" hover:bg-blue-200 border-2 rounded-full border-blue-600 px-5 py-1 mx-3" href="/about">
+              <Link className=" hover:bg-blue-200 border-2 rounded-full border-blue-600 px-5 pt-1 mx-3" href="https://www.linkedin.com/in/cesar-martins-000325261/" target="_blank">
                 Linkedin
               </Link>
             </div>
           </div>
         </div>
       </div>
-    </PrivateRoute>
+      <footer className="fixed bottom-0 left-0 w-full bg-sky-700 text-white py-2 flex items-center justify-center font-handlee">
+        <p>Junior de Paula &copy; {new Date().getFullYear()}</p>
+      </footer>
+    </>
   );
 }

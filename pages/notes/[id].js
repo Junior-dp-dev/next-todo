@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Head from "next/head";
+import PrivateRoute from "@/components/PrivateRoute";
 import Note from "../../components/Note";
 
 export default function NoteId() {
@@ -7,10 +7,10 @@ export default function NoteId() {
   const { id } = router.query;
 
   return (
-    <>
+    <PrivateRoute>
       <div>
         <Note noteId={id} />
       </div>
-    </>
+    </PrivateRoute>
   );
 }

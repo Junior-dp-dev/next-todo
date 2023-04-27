@@ -10,7 +10,7 @@ export default function Navbar() {
     Router.push("/");
   }
 
-  if (router.pathname === "/" || router.pathname === "/register" || router.pathname === "/login") {
+  if (router.pathname === "/" || router.pathname === "/register" || router.pathname === "/login" || router.pathname === "/about") {
     return null;
   }
 
