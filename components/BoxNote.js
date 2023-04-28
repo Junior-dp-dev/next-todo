@@ -7,7 +7,7 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import axiosInstance from "./axiosInstance ";
 
 function BtnDelete(props) {
-  const { note, getNotes } = props;
+  const { note, router } = props;
 
   const handleDelete = async () => {
     const shouldDelete = confirm("Tem certeza que deseja deletar?");
@@ -15,7 +15,7 @@ function BtnDelete(props) {
       try {
         await axiosInstance.delete(`notes/delete/${note.id}/`);
         console.log(`Nota ${note.id} deletada`);
-        getNotes();
+        router.push(`/notes/`);
       } catch (error) {
         console.error(error);
       }
@@ -29,12 +29,11 @@ function BtnDelete(props) {
   );
 }
 
-const handleFinish = async (note, setFinished, getNotes) => {
+const handleFinish = async (note, setFinished) => {
   try {
     const updateNote = { ...note, finished: setFinished };
     const response = await axiosInstance.put(`notes/update/${note.id}/`, updateNote);
     console.log("Note updated:", response.data);
-    getNotes();
   } catch (error) {
     console.error(error);
   }
@@ -63,10 +62,11 @@ function BtnVisibility({ note }) {
 }
 
 function BtnCheckBoxOut(props) {
-  const { note, getNotes, router } = props;
+  const { note, router, getNotes } = props;
 
   const handleFinishNote = async () => {
-    await handleFinish(note, true, getNotes, router);
+    await handleFinish(note, true, router);
+    getNotes();
     router.push(`/notes/`);
   };
 
@@ -78,10 +78,11 @@ function BtnCheckBoxOut(props) {
 }
 
 function BtnCheckBox(props) {
-  const { note, getNotes, router } = props;
+  const { note, router, getNotes } = props;
 
   const handleFinishNote = async () => {
-    await handleFinish(note, false, getNotes, router);
+    await handleFinish(note, false, router);
+    getNotes();
     router.push(`/notesFinished/`);
   };
 
@@ -112,7 +113,7 @@ export function Note(props) {
             </p>
             <div className="bottom-0">
               <div className="flex justify-end gap-3 mr-5 mb-3">
-                <BtnDelete note={note} getNotes={getNotes} />
+                <BtnDelete note={note} router={router} />
                 <BtnEdit note={note} />
                 <BtnVisibility note={note} />
                 <BtnCheckBoxOut note={note} getNotes={getNotes} router={router} />
@@ -145,7 +146,7 @@ export function NoteFinished(props) {
             </p>
             <div className="bottom-0">
               <div className="flex justify-end gap-3 mr-5 mb-3">
-                <BtnDelete note={note} getNotes={getNotes} />
+                <BtnDelete note={note} router={router} />
                 <BtnVisibility note={note} />
                 <BtnCheckBox note={note} getNotes={getNotes} router={router} />
               </div>
@@ -158,8 +159,7 @@ export function NoteFinished(props) {
 }
 
 export function NoteId(props) {
-  const { note } = props;
-
+  const { note, router, isFinished, getNotes } = props;
   return (
     <div className="flex flex-col min-h-vh90  justify-center items-center mx-20">
       <div className="flex text-left flex-col border-4 border-sky-500 rounded-xl">
@@ -168,10 +168,9 @@ export function NoteId(props) {
         <p className="text-3xl p-7 flex-grow break-words ">{note.content}</p>
         <div className="bottom-0">
           <div className="flex justify-end gap-3 mr-5 mb-3">
-            <BtnDelete note={note} />
-            <BtnEdit note={note} />
-            <BtnVisibility note={note} />
-            <BtnCheckBoxOut note={note} />
+            <BtnDelete note={note} router={router} />
+            {!isFinished && <BtnEdit note={note} />}
+            {isFinished ? <BtnCheckBox note={note} router={router} getNotes={getNotes} /> : <BtnCheckBoxOut note={note} router={router} getNotes={getNotes} />}
           </div>
         </div>
       </div>

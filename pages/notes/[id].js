@@ -9,7 +9,7 @@ export default function NoteId() {
   return (
     <PrivateRoute>
       <div>
-        <Note noteId={id} />
+        <Note noteId={id} router={router} />
       </div>
     </PrivateRoute>
   );
