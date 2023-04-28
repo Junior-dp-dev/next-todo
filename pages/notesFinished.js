@@ -1,36 +1,25 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Head from "next/head";
-import { getToken } from "../utils/auth";
 import { useRouter } from "next/router";
 import { NoteFinished } from "@/components/BoxNote";
 import Link from "next/link";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-
 import PrivateRoute from "@/components/PrivateRoute";
+import axiosInstance from "@/components/axiosInstance ";
 
 export default function Lista() {
   const [notes, setNotes] = useState([]);
-  const [deleted, setDeleted] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     getNotes();
-  }, [deleted]);
+  }, []);
 
   const getNotes = () => {
-    const token = getToken();
-    console.log("O token aqui na Lista é: token");
-    axios
-      .get(`${process.env.API_URL}/api/notes/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    axiosInstance
+      .get(`notes/`)
       .then((response) => {
         const data = response.data;
-        console.log("OS DADOS RECEBIDOS SÃO:");
-        console.table(data);
         setNotes(data);
       })
       .catch((error) => {
@@ -45,7 +34,7 @@ export default function Lista() {
         <title>Concluídos</title>
       </Head>
       {notes.length !== 0 ? (
-        <NoteFinished notes={uncompletedTodos} getNotes={getNotes} />
+        <NoteFinished notes={uncompletedTodos} getNotes={getNotes} router={router} />
       ) : (
         <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
           <h1 className=" text-5xl  font-bold">Conclua suas notas!</h1>

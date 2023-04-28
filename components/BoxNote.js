@@ -4,25 +4,24 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import axios from "axios";
-import { getToken } from "../utils/auth";
+import axiosInstance from "./axiosInstance ";
 
 function BtnDelete(props) {
   const { note, getNotes } = props;
+
   const handleDelete = async () => {
-    try {
-      const token = getToken();
-      await axios.delete(`${process.env.API_URL}/api/notes/delete/${note.id}/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(`Nota ${note.id} deletada`);
-      getNotes();
-    } catch (error) {
-      console.error(error);
+    const shouldDelete = confirm("Tem certeza que deseja deletar?");
+    if (shouldDelete) {
+      try {
+        await axiosInstance.delete(`notes/delete/${note.id}/`);
+        console.log(`Nota ${note.id} deletada`);
+        getNotes();
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
+
   return (
     <button onClick={handleDelete}>
       <DeleteIcon className="text-red-600" />
@@ -30,19 +29,12 @@ function BtnDelete(props) {
   );
 }
 
-const handleFinish = async (note, setFinished, getNotes, router) => {
-  const token = getToken();
-
+const handleFinish = async (note, setFinished, getNotes) => {
   try {
-    const updatedItem = { ...note, finished: setFinished };
-    const response = await axios.put(`${process.env.API_URL}/api/notes/update/${note.id}/`, updatedItem, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const updateNote = { ...note, finished: setFinished };
+    const response = await axiosInstance.put(`notes/update/${note.id}/`, updateNote);
     console.log("Note updated:", response.data);
     getNotes();
-    router.push(`/notes/`);
   } catch (error) {
     console.error(error);
   }
@@ -75,6 +67,7 @@ function BtnCheckBoxOut(props) {
 
   const handleFinishNote = async () => {
     await handleFinish(note, true, getNotes, router);
+    router.push(`/notes/`);
   };
 
   return (
@@ -89,6 +82,7 @@ function BtnCheckBox(props) {
 
   const handleFinishNote = async () => {
     await handleFinish(note, false, getNotes, router);
+    router.push(`/notesFinished/`);
   };
 
   return (

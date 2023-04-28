@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { useState } from "react";
 import axios from "axios";
-import { setToken, getToken } from "../utils/auth";
+import { setToken } from "../utils/auth";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Link from "next/link";
@@ -14,56 +13,37 @@ export default function Register() {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const token = getToken();
-
-    if (token) {
-      router.push("/about");
-    }
-  }, []);
-
-  const login = (username, password) => {
-    return axios
-      .post("http://localhost:8000/api/token/", {
-        username: username,
-        password: password,
-      })
-      .then((response) => {
-        // O token de autenticação será retornado na resposta da API
-        const tokenAcess = response.data.access;
-        setToken(tokenAcess);
-        console.log("Token acess recebido:", tokenAcess);
-        return tokenAcess;
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.response && error.response.status === 401) {
-          // Erro de autenticação
-          localStorage.removeItem("api");
-          setError("Usuário ou senha incorretos.");
-        } else {
-          // Outro tipo de erro
-          setError("Não foi possível efetuar o login. Tente novamente mais tarde.");
-        }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`${process.env.API_URL}/api/token/`, {
+        username,
+        password,
       });
+      const { access, refresh } = response.data;
+      // armazene o access e refresh token em localStorage ou em um estado global, como Redux
+      setToken(access);
+      setRefreshToken(refresh);
+      console.log("Token: ", access);
+      console.log("RefreshToken: ", refresh);
+      router.push("/notes");
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 401) {
+        // Erro de autenticação
+        setError("Usuário ou senha incorretos.");
+      } else {
+        // Outro tipo de erro
+        setError("Não foi possível efetuar o login. Tente novamente mais tarde.");
+      }
+    }
   };
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
-
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); // previne que a página recarregue após a submissão do formulário
-    login(username, password).then((token) => {
-      console.log("Login bem-sucedido");
-      if (token) {
-        router.push("/about"); // redireciona para outra página
-      }
-    });
   };
 
   return (

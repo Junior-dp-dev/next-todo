@@ -7,8 +7,6 @@ export default function PrivateRoute({ children }) {
 
   useEffect(() => {
     const token = getToken();
-    console.log(token);
-
     if (!token) {
       // Redirecionar o usuário para a página de login se ele não estiver autenticado
       router.push("/");

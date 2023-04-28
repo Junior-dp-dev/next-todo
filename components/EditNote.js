@@ -1,11 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
-import { getToken } from "../utils/auth";
 import { useRouter } from "next/router";
 import FormNote from "./FormNote";
 import Head from "next/head";
 import { GetOne } from "../components/GetOne";
 import { useEffect } from "react";
+import axiosInstance from "./axiosInstance ";
 
 const EditNote = ({ noteId }) => {
   const [title, setTitle] = useState("");
@@ -29,26 +28,14 @@ const EditNote = ({ noteId }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const token = getToken();
-
     try {
-      const response = await axios.put(
-        `${process.env.API_URL}/api/notes/update/${noteId}/`,
-        {
-          title,
-          content,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.put(`notes/update/${noteId}/`, {
+        title,
+        content,
+      });
 
       console.log("Note updated:", response.data);
 
-      // Close the form after successful update
       router.push(`/notes/`);
     } catch (error) {
       console.error(error);
@@ -61,7 +48,11 @@ const EditNote = ({ noteId }) => {
       <Head>
         <title>Editar Nota</title>
       </Head>
-      <FormNote titleText={"Editar Nota"} buttonText={"Atualizar"} handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
+      {error ? (
+        <p className="text-red-500 font-bold">{error}</p>
+      ) : (
+        <FormNote titleText={"Editar Nota"} buttonText={"Atualizar"} handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
+      )}
     </>
   );
 };
