@@ -98,7 +98,7 @@ export function Note(props) {
 
   return (
     <div className="min-h-vh90 ">
-      <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-green-500">Tarefas para fazer</h1>
+      <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-blue-500 text-sky-600">A fazer</h1>
       <div className="flex gap-5 flex-wrap justify-center px-5 mb-10">
         {notes.map((note) => (
           <div key={note.id} className="flex text-left flex-col w-[28rem] border-4 border-sky-500 rounded-xl">
@@ -131,15 +131,15 @@ export function NoteFinished(props) {
 
   return (
     <div className="min-h-vh90 ">
-      <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-green-500">Tarefas para fazer</h1>
+      <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-yellow-500 text-yellow-700">Concluídos</h1>
       <div className="flex gap-5 flex-wrap justify-center px-5 mb-5">
         {notes.map((note) => (
-          <div key={note.id} className="flex text-left flex-col w-[28rem] border-4 border-sky-500 rounded-xl">
+          <div key={note.id} className="flex text-left flex-col w-[28rem] border-4 border-yellow-500 rounded-xl">
             <h2 className=" font-bold text-4xl px-4 pt-3 pb-2">
               {note.title.slice(0, 23)}
               {note.title.length > 23 ? "..." : ""}
             </h2>
-            <span className="border-b mx-3 border-green-500 opacity-30"></span>
+            <span className="border-b mx-3 border-yellow-500 opacity-30"></span>
             <p className="text-2xl p-4 flex-grow break-words ">
               {note.content.slice(0, 73)}
               {note.content.length > 73 ? "..." : ""}
