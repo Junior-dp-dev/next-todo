@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { removeToken } from "../utils/auth";
+import { removeToken, removeRefreshToken } from "../utils/auth";
 import Router, { useRouter } from "next/router";
 
 export default function Navbar() {
@@ -7,6 +7,7 @@ export default function Navbar() {
 
   function handleLogout() {
     removeToken();
+    removeRefreshToken();
     Router.push("/");
   }
 

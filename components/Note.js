@@ -23,6 +23,10 @@ const Note = ({ noteId }) => {
     fetchNote();
   }, [noteId]);
 
+  const errorsNote = () => {
+    console.log(note.title + "deleted");
+  };
+
   if (error) {
     return <p className="text-red-500">{error}</p>;
   }
@@ -36,7 +40,7 @@ const Note = ({ noteId }) => {
       <Head>
         <title>Nota</title>
       </Head>
-      <NoteId note={note} router={router} isFinished={note.finished} getNotes={fetchNote} />
+      <NoteId note={note} router={router} isFinished={note.finished} getNotes={errorsNote} />
     </>
   );
 };

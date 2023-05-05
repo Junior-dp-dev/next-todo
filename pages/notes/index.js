@@ -17,8 +17,6 @@ export default function Lista() {
       .get("notes/")
       .then((response) => {
         const data = response.data;
-        //console.log("OS DADOS RECEBIDOS SÃO:");
-        //console.table(data);
         setNotes(data);
       })
       .catch((error) => {

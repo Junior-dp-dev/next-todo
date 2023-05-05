@@ -5,9 +5,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import axiosInstance from "./axiosInstance ";
+import EventIcon from "@mui/icons-material/Event";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 
 function BtnDelete(props) {
-  const { note, router } = props;
+  const { note, router, getNotes } = props;
 
   const handleDelete = async () => {
     const shouldDelete = confirm("Tem certeza que deseja deletar?");
@@ -15,7 +17,8 @@ function BtnDelete(props) {
       try {
         await axiosInstance.delete(`notes/delete/${note.id}/`);
         console.log(`Nota ${note.id} deletada`);
-        router.push(`/notes/`);
+        note.finished ? router.push(`/notesFinished`) : router.push(`/notes`);
+        getNotes();
       } catch (error) {
         console.error(error);
       }
@@ -29,11 +32,10 @@ function BtnDelete(props) {
   );
 }
 
-const handleFinish = async (note, setFinished) => {
+const handleFinish = async (note, setFinished, setFData) => {
   try {
-    const updateNote = { ...note, finished: setFinished };
-    const response = await axiosInstance.put(`notes/update/${note.id}/`, updateNote);
-    console.log("Note updated:", response.data);
+    const updateNote = { ...note, finished: setFinished, fData: setFData };
+    await axiosInstance.put(`notes/update/${note.id}/`, updateNote);
   } catch (error) {
     console.error(error);
   }
@@ -61,11 +63,18 @@ function BtnVisibility({ note }) {
   );
 }
 
+function formatarData(data = new Date()) {
+  const dia = String(data.getDate()).padStart(2, "0");
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  const ano = data.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+}
+
 function BtnCheckBoxOut(props) {
   const { note, router, getNotes } = props;
 
   const handleFinishNote = async () => {
-    await handleFinish(note, true, router);
+    await handleFinish(note, true, formatarData());
     getNotes();
     router.push(`/notes/`);
   };
@@ -81,7 +90,7 @@ function BtnCheckBox(props) {
   const { note, router, getNotes } = props;
 
   const handleFinishNote = async () => {
-    await handleFinish(note, false, router);
+    await handleFinish(note, false);
     getNotes();
     router.push(`/notesFinished/`);
   };
@@ -95,7 +104,6 @@ function BtnCheckBox(props) {
 
 export function Note(props) {
   const { notes, getNotes, router } = props;
-
   return (
     <div className="min-h-vh90 ">
       <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-blue-500 text-sky-600">A fazer</h1>
@@ -106,14 +114,18 @@ export function Note(props) {
               {note.title.slice(0, 23)}
               {note.title.length > 23 ? "..." : ""}
             </h2>
-            <span className="border-b mx-3 border-green-500 opacity-30"></span>
+            <span className="border-b mx-3 border-sky-500 opacity-30"></span>
             <p className="text-2xl p-4 flex-grow break-words ">
               {note.content.slice(0, 73)}
               {note.content.length > 73 ? "..." : ""}
             </p>
-            <div className="bottom-0">
-              <div className="flex justify-end gap-3 mr-5 mb-3">
-                <BtnDelete note={note} router={router} />
+            <div className="bottom-0 flex justify-between mx-5 mb-3 items-center">
+              <div className="flex gap-2">
+                <EventIcon className=" text-gray-500" />
+                <p>{note.cData}</p>
+              </div>
+              <div className="flex gap-3">
+                <BtnDelete note={note} router={router} getNotes={getNotes} />
                 <BtnEdit note={note} />
                 <BtnVisibility note={note} />
                 <BtnCheckBoxOut note={note} getNotes={getNotes} router={router} />
@@ -144,9 +156,17 @@ export function NoteFinished(props) {
               {note.content.slice(0, 73)}
               {note.content.length > 73 ? "..." : ""}
             </p>
-            <div className="bottom-0">
-              <div className="flex justify-end gap-3 mr-5 mb-3">
-                <BtnDelete note={note} router={router} />
+            <div className="bottom-0 flex justify-between mx-5 mb-3 items-center">
+              <div className="flex gap-2">
+                <EventIcon className=" text-gray-500" />
+                <p>{note.cData}</p>
+              </div>
+              <div className="flex gap-2 mr-3">
+                <EventAvailableIcon className=" text-gray-500" />
+                <p>{note.fData}</p>
+              </div>
+              <div className="flex gap-3">
+                <BtnDelete note={note} router={router} getNotes={getNotes} />
                 <BtnVisibility note={note} />
                 <BtnCheckBox note={note} getNotes={getNotes} router={router} />
               </div>
@@ -160,17 +180,30 @@ export function NoteFinished(props) {
 
 export function NoteId(props) {
   const { note, router, isFinished, getNotes } = props;
+  const color = isFinished ? "border-yellow-500" : "border-sky-500";
   return (
     <div className="flex flex-col min-h-vh90  justify-center items-center mx-20">
-      <div className="flex text-left flex-col border-4 border-sky-500 rounded-xl">
+      <div className={`flex text-left flex-col border-4 ${color} rounded-xl`}>
         <h2 className=" font-bold text-5xl p-5 ">{note.title}</h2>
-        <span className="border-b mx-3 border-green-500 opacity-30"></span>
+        <span className={`border-b mx-3 ${color} opacity-30`}></span>
         <p className="text-3xl p-7 flex-grow break-words ">{note.content}</p>
         <div className="bottom-0">
-          <div className="flex justify-end gap-3 mr-5 mb-3">
-            <BtnDelete note={note} router={router} />
-            {!isFinished && <BtnEdit note={note} />}
-            {isFinished ? <BtnCheckBox note={note} router={router} getNotes={getNotes} /> : <BtnCheckBoxOut note={note} router={router} getNotes={getNotes} />}
+          <div className="bottom-0 flex justify-between mx-5 mb-3 items-center gap-3">
+            <div className="flex gap-2 mr-3">
+              <EventIcon className=" text-gray-500" />
+              <p>{note.cData}</p>
+            </div>
+            {isFinished && (
+              <div className="flex gap-2 mr-3">
+                <EventAvailableIcon className=" text-gray-500" />
+                <p>{note.fData}</p>
+              </div>
+            )}
+            <div className="flex gap-3">
+              <BtnDelete note={note} router={router} getNotes={getNotes} />
+              {!isFinished && <BtnEdit note={note} />}
+              {isFinished ? <BtnCheckBox note={note} router={router} getNotes={getNotes} /> : <BtnCheckBoxOut note={note} router={router} getNotes={getNotes} />}
+            </div>
           </div>
         </div>
       </div>

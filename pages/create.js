@@ -10,11 +10,19 @@ export default function CreateObject() {
   const [content, setContent] = useState("");
   const router = useRouter();
 
+  function formatarData(data = new Date()) {
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
       title: title,
       content: content,
+      cData: formatarData(),
     };
 
     axiosInstance
