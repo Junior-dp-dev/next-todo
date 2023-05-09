@@ -16,7 +16,7 @@ export default function Navbar() {
   }
 
   return (
-    <ul className="flex text-white font-bold text-2xl  font-handlee gap-10  min-h-p60 pl-5 items-center bg-[url('/images/todo4.jpg')] ">
+    <ul className="flex text-white font-bold text-2xl  font-handlee gap-10  min-h-p60 pl-5 items-center bg-[url('/images/Background.jpg')] ">
       <li className="hover:text-yellow-400 drop-shadow-lg">
         <Link href="/create">Criar</Link>
       </li>

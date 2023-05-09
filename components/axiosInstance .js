@@ -2,27 +2,23 @@ import { getToken, getRefreshToken, setToken, setRefreshToken } from "../utils/a
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: `${process.env.API_URL}/api`,
   timeout: 5000,
 });
 
 async function refreshAccessToken() {
   const refresh_token = getRefreshToken();
   try {
-    const response = await axios.post("http://localhost:8000/api/token/refresh/", {
+    const response = await axios.post(`${process.env.API_URL}/api/token/refresh/`, {
       refresh: refresh_token,
     });
     const { access } = response.data;
-    setToken(access);
-    console.log("Novo token de acesso gerado: " + access);
-
-    // Armazena o novo token de acesso e o token de atualização no local storage ou em cookies
     setToken(access);
     setRefreshToken(response.data.refresh);
   } catch (error) {
     console.error(error);
   }
-  console.log("Token atualizado em: " + new Date());
+  "Token atualizado em: " + new Date();
 }
 
 // Adiciona um interceptor de solicitação para adicionar o cabeçalho Authorization com o token atualizado
@@ -57,7 +53,7 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-// Atualiza o token a cada 3 minutos
-setInterval(refreshAccessToken, 3 * 60 * 1000);
+// Atualiza o token a cada 4 minutos
+setInterval(refreshAccessToken, 4 * 60 * 1000);
 
 export default axiosInstance;

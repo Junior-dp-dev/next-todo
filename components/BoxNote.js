@@ -16,7 +16,6 @@ function BtnDelete(props) {
     if (shouldDelete) {
       try {
         await axiosInstance.delete(`notes/delete/${note.id}/`);
-        console.log(`Nota ${note.id} deletada`);
         note.finished ? router.push(`/notesFinished`) : router.push(`/notes`);
         getNotes();
       } catch (error) {

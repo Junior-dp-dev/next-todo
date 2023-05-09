@@ -27,12 +27,11 @@ export default function CreateObject() {
 
     axiosInstance
       .post(`notes/add/`, data)
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         router.push(`/notes/`);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 

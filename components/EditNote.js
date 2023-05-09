@@ -33,9 +33,6 @@ const EditNote = ({ noteId }) => {
         title,
         content,
       });
-
-      console.log("Note updated:", response.data);
-
       router.push(`/notes/`);
     } catch (error) {
       console.error(error);
