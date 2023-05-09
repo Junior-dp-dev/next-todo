@@ -74,7 +74,7 @@ export default function Register() {
             </div>
           ) : (
             <div>
-              <h1 className="text-4xl font-bold text-blue-500">Login</h1>
+              <h1 className="text-4xl font-bold text-blue-500">Criar conta</h1>
               <form className="flex flex-col items-center gap-5 m-5" onSubmit={handleSubmit}>
                 <div className="border rounded-full w-60 h-10 flex pl-3 gap-2 items-center border-black">
                   <PersonOutlineIcon />

@@ -52,9 +52,9 @@ export default function Home() {
         <meta name="description" content="Não esqueça de mais nada!" />
       </Head>
       <div className="flex flex-col justify-center items-center h-screen w-screen bg-[url('/images/Background.jpg')] bg-no-repeat bg-center bg-cover">
-        <h1 className=" text-white drop-shadow-[0_3px_2px_rgba(0,0,0,1)] font-sans font-bold text-left text-6xl mb-6">Just To Do!</h1>
+        <h1 className=" text-white drop-shadow-[0_3px_2px_rgba(0,0,0,1)] font-sans font-bold text-left text-6xl mb-6">Bem-vindo!</h1>
         <div className="px-20 py-28 min-w-full flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
-          <h1 className="text-4xl font-bold text-blue-500">Sign In</h1>
+          <h1 className="text-4xl font-bold text-blue-500">Entrar</h1>
           <form className="flex flex-col items-center gap-5 m-5" onSubmit={handleSubmit}>
             <div className="border rounded-full w-60 h-10 flex pl-3 gap-2 items-center border-black">
               <PersonOutlineIcon />
