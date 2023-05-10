@@ -11,7 +11,7 @@ export default function About() {
       <Head>
         <title>Sobre</title>
       </Head>
-      <ul className="flex text-white font-bold text-2xl  font-handlee py-2 pl-10  bg-[url('/images/Background.jpg')] ">
+      <ul className="flex md:static fixed w-full text-white font-bold text-2xl  font-handlee py-2 pl-10  bg-[url('/images/Background.jpg')] ">
         <li className="hover:text-green-100 drop-shadow-lg">
           <Link href="/notes">Voltar</Link>
         </li>
