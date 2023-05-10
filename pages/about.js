@@ -16,7 +16,7 @@ export default function About() {
           <Link href="/notes">Voltar</Link>
         </li>
       </ul>
-      <div className="p-10 justify-center flex flex-col gap-10 min-h-vh90">
+      <div className="md:p-12 px-3 py-10 justify-center flex flex-col  min-h-vh90">
         <div className="text-2xl">
           <h1 className=" font-bold text-4xl">Conheça um pouco mais sobre as pessoas que estão por trás deste projeto. </h1>
           <br />
@@ -25,29 +25,29 @@ export default function About() {
             em contato conosco. Estamos ansiosos para ouvir a sua opinião!
           </p>
         </div>
-        <div className="flex justify-center text-2xl">
-          <div className=" w-96 flex flex-col items-center gap-2">
-            <Image className=" border-2 border-black rounded-full" src="/images/Junior.jpg" alt="Foto Junior" width={200} height={200} />
+        <div className="flex md:flex-row md:gap-28 flex-col gap-14 py-10 justify-center text-2xl">
+          <div className="flex flex-col items-center">
+            <Image className="border-2 border-black rounded-full" src="/images/Junior.jpg" alt="Foto Junior" width={200} height={200} />
             <h1>Junior de Paula</h1>
             <p>{front}</p>
-            <div className="mt-5">
-              <Link className=" hover:bg-purple-200 border-2 rounded-full border-purple-600 px-5 pt-1 mx-3" href="https://github.com/Junior-dp-dev" target="_blank">
+            <div className="flex mt-5 gap-3">
+              <Link className="hover:bg-purple-200 border-2 rounded-full px-5 pt-1 border-purple-600" href="https://github.com/Junior-dp-dev" target="_blank">
                 Github
               </Link>
-              <Link className=" hover:bg-blue-200 border-2 rounded-full border-blue-600 px-5 pt-1 mx-3" href="https://www.linkedin.com/in/junior-de-paula-1b7091262/" target="_blank">
+              <Link className="hover:bg-blue-200 border-2 rounded-full px-5 pt-1 border-blue-600" href="https://www.linkedin.com/in/junior-de-paula-1b7091262/" target="_blank">
                 Linkedin
               </Link>
             </div>
           </div>
-          <div className=" w-96 flex flex-col items-center gap-2">
-            <Image className=" border-2 border-black rounded-full" src="/images/Cesar.jpg" alt="Foto Junior" width={200} height={200} />
+          <div className="flex flex-col items-center">
+            <Image className="border-2 border-black rounded-full" src="/images/Cesar.jpg" alt="Foto Junior" width={213} height={213} />
             <h1>César Augusto</h1>
             <p>{back}</p>
-            <div className="mt-5">
-              <Link className=" hover:bg-purple-200 border-2 rounded-full border-purple-600 px-5 pt-1 mx-3" href="https://github.com/KisarDev" target="_blank">
+            <div className="flex mt-5 gap-3">
+              <Link className="hover:bg-purple-200 border-2 rounded-full px-5 pt-1 border-purple-600" href="https://github.com/KisarDev" target="_blank">
                 Github
               </Link>
-              <Link className=" hover:bg-blue-200 border-2 rounded-full border-blue-600 px-5 pt-1 mx-3" href="https://www.linkedin.com/in/cesar-martins-000325261/" target="_blank">
+              <Link className="hover:bg-blue-200 border-2 rounded-full px-5 pt-1 border-blue-600" href="https://www.linkedin.com/in/cesar-martins-000325261/" target="_blank">
                 Linkedin
               </Link>
             </div>

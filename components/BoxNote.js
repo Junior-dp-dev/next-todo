@@ -105,25 +105,25 @@ export function Note(props) {
   const { notes, getNotes, router } = props;
   return (
     <div className="min-h-vh90 ">
-      <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-blue-500 text-sky-600">A fazer</h1>
-      <div className="flex gap-5 flex-wrap justify-center px-5 mb-10">
+      <h1 className="my-5 pb-5 mx-10 text-5xl font-bold border-b border-blue-500 text-sky-600">A fazer</h1>
+      <div className="flex gap-5 flex-wrap justify-center px-5 my-10">
         {notes.map((note) => (
-          <div key={note.id} className="flex text-left flex-col w-[28rem] border-4 border-sky-500 rounded-xl">
-            <h2 className=" font-bold text-4xl px-4 pt-3 pb-2">
+          <div key={note.id} className="md:w-auto w-64 flex text-left flex-col border-4 border-sky-500 rounded-xl">
+            <h2 className="font-bold text-4xl px-4 pt-3 pb-2 break-words">
               {note.title.slice(0, 23)}
               {note.title.length > 23 ? "..." : ""}
             </h2>
             <span className="border-b mx-3 border-sky-500 opacity-30"></span>
             <p className="text-2xl p-4 flex-grow break-words ">
-              {note.content.slice(0, 73)}
-              {note.content.length > 73 ? "..." : ""}
+              {note.content.slice(0, 35)}
+              {note.content.length > 35 ? "..." : ""}
             </p>
-            <div className="bottom-0 flex justify-between mx-5 mb-3 items-center">
-              <div className="flex gap-2">
+            <div className="flex md:gap-5 gap-2 justify-between md:mx-4 mx-2 mb-3 items-center">
+              <div className="flex gap-1">
                 <EventIcon className=" text-gray-500" />
                 <p>{note.cData}</p>
               </div>
-              <div className="flex gap-3">
+              <div className="flex md:gap-3 gap-1">
                 <BtnDelete note={note} router={router} getNotes={getNotes} />
                 <BtnEdit note={note} />
                 <BtnVisibility note={note} />
@@ -142,29 +142,31 @@ export function NoteFinished(props) {
 
   return (
     <div className="min-h-vh90 ">
-      <h1 className="my-10 mx-40 pb-5 text-5xl font-bold border-b border-yellow-500 text-yellow-700">Concluídos</h1>
-      <div className="flex gap-5 flex-wrap justify-center px-5 mb-5">
+      <h1 className="my-5 pb-5 mx-10 text-5xl font-bold border-b border-yellow-500 text-yellow-700">Concluídos</h1>
+      <div className="flex gap-5 flex-wrap justify-center px-5 my-10">
         {notes.map((note) => (
-          <div key={note.id} className="flex text-left flex-col w-[28rem] border-4 border-yellow-500 rounded-xl">
-            <h2 className=" font-bold text-4xl px-4 pt-3 pb-2">
+          <div key={note.id} className="md:w-auto w-64 flex text-left flex-col border-4 border-yellow-500 rounded-xl">
+            <h2 className="font-bold text-4xl px-4 pt-3 pb-2 break-words">
               {note.title.slice(0, 23)}
               {note.title.length > 23 ? "..." : ""}
             </h2>
             <span className="border-b mx-3 border-yellow-500 opacity-30"></span>
             <p className="text-2xl p-4 flex-grow break-words ">
-              {note.content.slice(0, 73)}
-              {note.content.length > 73 ? "..." : ""}
+              {note.content.slice(0, 35)}
+              {note.content.length > 35 ? "..." : ""}
             </p>
-            <div className="bottom-0 flex justify-between mx-5 mb-3 items-center">
-              <div className="flex gap-2">
-                <EventIcon className=" text-gray-500" />
-                <p>{note.cData}</p>
+            <div className="flex md:gap-5 gap-2 justify-between md:mx-4 mx-2 mb-3 items-center">
+              <div className="md:flex gap-3">
+                <div className="flex gap-1">
+                  <EventIcon className=" text-gray-500" />
+                  <p>{note.cData}</p>
+                </div>
+                <div className="flex gap-1">
+                  <EventAvailableIcon className=" text-gray-500" />
+                  <p>{note.fData}</p>
+                </div>
               </div>
-              <div className="flex gap-2 mr-3">
-                <EventAvailableIcon className=" text-gray-500" />
-                <p>{note.fData}</p>
-              </div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 mr-1">
                 <BtnDelete note={note} router={router} getNotes={getNotes} />
                 <BtnVisibility note={note} />
                 <BtnCheckBox note={note} getNotes={getNotes} router={router} />
@@ -182,23 +184,26 @@ export function NoteId(props) {
   const color = isFinished ? "border-yellow-500" : "border-sky-500";
   return (
     <div className="flex flex-col min-h-vh90  justify-center items-center mx-20">
-      <div className={`flex text-left flex-col border-4 ${color} rounded-xl`}>
+      <div className={`flex md:max-w-full break-words md:w-auto my-10 w-64 text-left flex-col border-4 ${color} rounded-xl`}>
         <h2 className=" font-bold text-5xl p-5 ">{note.title}</h2>
         <span className={`border-b mx-3 ${color} opacity-30`}></span>
         <p className="text-3xl p-7 flex-grow break-words ">{note.content}</p>
         <div className="bottom-0">
           <div className="bottom-0 flex justify-between mx-5 mb-3 items-center gap-3">
-            <div className="flex gap-2 mr-3">
-              <EventIcon className=" text-gray-500" />
-              <p>{note.cData}</p>
-            </div>
-            {isFinished && (
-              <div className="flex gap-2 mr-3">
-                <EventAvailableIcon className=" text-gray-500" />
-                <p>{note.fData}</p>
+            <div className="md:flex">
+              <div className="flex gap-1 md:mr-3">
+                <EventIcon className=" text-gray-500" />
+                <p>{note.cData}</p>
               </div>
-            )}
-            <div className="flex gap-3">
+              {isFinished && (
+                <div className="flex gap-1 md:mr-3">
+                  <EventAvailableIcon className=" text-gray-500" />
+                  <p>{note.fData}</p>
+                </div>
+              )}
+            </div>
+
+            <div className="flex md:gap-3 gap-1">
               <BtnDelete note={note} router={router} getNotes={getNotes} />
               {!isFinished && <BtnEdit note={note} />}
               {isFinished ? <BtnCheckBox note={note} router={router} getNotes={getNotes} /> : <BtnCheckBoxOut note={note} router={router} getNotes={getNotes} />}
