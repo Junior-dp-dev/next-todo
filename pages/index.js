@@ -52,9 +52,9 @@ export default function Home() {
         <meta name="description" content="Não esqueça de mais nada!" />
       </Head>
       <div className="flex flex-col justify-center items-center h-screen w-screen bg-[url('/images/Background.jpg')] bg-no-repeat bg-center bg-cover">
-        <h1 className=" text-white drop-shadow-[0_3px_2px_rgba(0,0,0,1)] font-sans font-bold text-left text-6xl mb-6">Bem-vindo!</h1>
-        <div className="px-20 py-28 min-w-full flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
-          <h1 className="text-4xl font-bold text-blue-500">Entrar</h1>
+        <h1 className=" text-white drop-shadow-[0_3px_2px_rgba(0,0,0,1)] font-sans font-bold md:text-6xl text-4xl pb-6">Bem-vindo!</h1>
+        <div className="md:p-20 py-10 flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
+          <h1 className="text-4xl md:text-5xl font-bold md:mb-8 text-blue-500">Entrar</h1>
           <form className="flex flex-col items-center gap-5 m-5" onSubmit={handleSubmit}>
             <div className="border rounded-full w-60 h-10 flex pl-3 gap-2 items-center border-black">
               <PersonOutlineIcon />
@@ -64,7 +64,7 @@ export default function Home() {
               <LockOpenIcon />
               <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} className="focus:outline-none" />
             </div>
-            <button className="border rounded-full w-60 h-10 border-black text-white font-bold mt-5 bg-gradient-to-r from-blue-500 to-green-400 hover:from-lime-500 hover:to-cyan-500" type="submit">
+            <button className="border rounded-full w-60 h-10 border-black text-white font-bold md:mt-5 bg-gradient-to-r from-blue-500 to-green-400 hover:from-lime-500 hover:to-cyan-500" type="submit">
               Login
             </button>
             {error && <p className="text-red-500 font-bold">{error}</p>}

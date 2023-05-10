@@ -64,7 +64,7 @@ export default function Register() {
         <meta name="description" content="Não esqueça de mais nada!" />
       </Head>
       <div className="flex flex-col justify-center items-center h-screen w-screen bg-[url('/images/Background.jpg')] bg-no-repeat bg-center bg-cover">
-        <div className="px-20 py-28 min-w-full  flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
+        <div className="md:p-20 md:w-auto w-72 p-5 flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
           {isAccountCreated ? (
             <div className="flex flex-col justify-center items-center gap-10">
               <h1 className="text-4xl font-bold text-blue-500">Úsuario Criado com sucesso!</h1>
@@ -74,7 +74,7 @@ export default function Register() {
             </div>
           ) : (
             <div>
-              <h1 className="text-4xl font-bold text-blue-500">Criar conta</h1>
+              <h1 className="text-4xl md:text-5xl font-bold md:mb-8 text-blue-500">Criar conta</h1>
               <form className="flex flex-col items-center gap-5 m-5" onSubmit={handleSubmit}>
                 <div className="border rounded-full w-60 h-10 flex pl-3 gap-2 items-center border-black">
                   <PersonOutlineIcon />
@@ -90,7 +90,7 @@ export default function Register() {
                 </div>
 
                 <button
-                  className="border rounded-full w-60 h-10 border-black text-white font-bold mt-5 bg-gradient-to-r from-blue-500 to-green-400 hover:from-lime-500 hover:to-cyan-500"
+                  className="border rounded-full w-60 h-10 border-black text-white font-bold md:mt-5 bg-gradient-to-r from-blue-500 to-green-400 hover:from-lime-500 hover:to-cyan-500"
                   type="submit">
                   Registrar
                 </button>
