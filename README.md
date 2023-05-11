@@ -24,8 +24,12 @@ Acesse em nosso site: https://notes-amber-tau.vercel.app/
 //Adicionando uma nova tarefa
 
 ### Autoria
-Front-end criado por @Junior-dp-dev
-Back-end criado por @KisarDev
+
+Front-end criado por:
+@Junior-dp-dev
+
+Back-end criado por: 
+@KisarDev
 
 ### Licença
 Este projeto está licenciado sob a Licença MIT.
