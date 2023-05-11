@@ -9,6 +9,8 @@ import axiosInstance from "@/components/axiosInstance ";
 
 export default function Lista() {
   const [notes, setNotes] = useState([]);
+  const [message, setMessage] = useState(null);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -21,11 +23,17 @@ export default function Lista() {
       .then((response) => {
         const data = response.data;
         setNotes(data);
+        setMessage("Conclua suas notas!");
       })
       .catch((error) => {
         console.error(error);
+        setMessage("Erro ao carregar notas, tente novamente mais tarte.");
       });
   };
+
+  if (!message) {
+    setMessage("Carregando notas..");
+  }
 
   const uncompletedTodos = notes.filter((note) => note.finished);
   return (
@@ -37,10 +45,12 @@ export default function Lista() {
         <NoteFinished notes={uncompletedTodos} getNotes={getNotes} router={router} />
       ) : (
         <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
-          <h1 className=" text-5xl  font-bold">Conclua suas notas!</h1>
-          <Link href={"/notes"}>
-            <CheckBoxIcon className="text-5xl text-green-500" />
-          </Link>
+          <h1 className=" text-5xl  font-bold">{message}</h1>
+          {message === "Conclua suas notas!" && (
+            <Link href={"/notes"}>
+              <CheckBoxIcon className="text-5xl text-green-500" />
+            </Link>
+          )}
         </div>
       )}
     </PrivateRoute>

@@ -27,11 +27,19 @@ const Note = ({ noteId }) => {
   };
 
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return (
+      <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
+        <h1 className=" text-5xl text-red-500 font-bold">{error}</h1>
+      </div>
+    );
   }
 
   if (!note) {
-    return <p>Loading note...</p>;
+    return (
+      <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
+        <h1 className=" text-5xl  font-bold">{"Carregando nota.."}</h1>
+      </div>
+    );
   }
 
   return (

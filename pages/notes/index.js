@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 export default function Lista() {
   const [notes, setNotes] = useState([]);
   const [deleted, setDeleted] = useState(false);
+  const [message, setMessage] = useState(null);
   const router = useRouter();
 
   const getNotes = () => {
@@ -18,15 +19,23 @@ export default function Lista() {
       .then((response) => {
         const data = response.data;
         setNotes(data);
+        setMessage("Crie sua primeira nota!");
       })
       .catch((error) => {
         console.error(error);
+        setMessage("Erro ao carregar notas, tente novamente mais tarte.");
       });
   };
+
+  if (!message) {
+    setMessage("Carregando notas..");
+  }
 
   useEffect(() => {
     getNotes();
   }, [deleted]);
+
+  const deleting = () => {};
 
   const uncompletedTodos = notes.filter((note) => !note.finished);
   return (
@@ -34,16 +43,20 @@ export default function Lista() {
       <Head>
         <title>Notas</title>
       </Head>
-      {notes.length !== 0 ? (
-        <Note notes={uncompletedTodos} getNotes={getNotes} router={router} />
-      ) : (
-        <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
-          <h1 className=" text-5xl  font-bold">Crie sua primeira nota!</h1>
-          <Link href={"/create"}>
-            <AddCircleOutlineIcon className="text-5xl text-sky-500" />
-          </Link>
-        </div>
-      )}
+      <>
+        {uncompletedTodos.length !== 0 ? (
+          <Note notes={uncompletedTodos} getNotes={getNotes} router={router} deleting={deleting} />
+        ) : (
+          <div className="min-h-vh90 flex flex-col items-center justify-center gap-5">
+            <h1 className=" text-5xl  font-bold">{message}</h1>
+            {message === "Crie sua primeira nota!" && (
+              <Link href={"/create"}>
+                <AddCircleOutlineIcon className="text-5xl text-sky-500" />
+              </Link>
+            )}
+          </div>
+        )}
+      </>
     </PrivateRoute>
   );
 }

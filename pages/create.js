@@ -8,6 +8,7 @@ import axiosInstance from "@/components/axiosInstance ";
 export default function CreateObject() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [message, setMessage] = useState(null);
   const router = useRouter();
 
   function formatarData(data = new Date()) {
@@ -19,6 +20,8 @@ export default function CreateObject() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setMessage("Adicionando nota...");
+
     const data = {
       title: title,
       content: content,
@@ -28,10 +31,12 @@ export default function CreateObject() {
     axiosInstance
       .post(`notes/add/`, data)
       .then(() => {
+        setMessage("Nota adicionada.");
         router.push(`/notes/`);
       })
       .catch((error) => {
         console.error(error);
+        setMessage("Erro ao adicionar nota.");
       });
   };
 
@@ -40,7 +45,7 @@ export default function CreateObject() {
       <Head>
         <title>Criar Nota</title>
       </Head>
-      <FormNote titleText={"Nova Nota"} buttonText={"Criar"} handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
+      <FormNote titleText={"Nova Nota"} message={message} buttonText={"Criar"} handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} />
     </PrivateRoute>
   );
 }

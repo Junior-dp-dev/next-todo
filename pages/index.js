@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { setToken, setRefreshToken } from "../utils/auth";
+import { setToken, setRefreshToken, setUsernameCookies } from "../utils/auth";
 import Head from "next/head";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -11,10 +11,13 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [textColor, setTextColor] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError("Carregando...");
+    setTextColor("text-green-600");
     try {
       const response = await axios.post(`${process.env.API_URL}/api/token/`, {
         username,
@@ -24,6 +27,7 @@ export default function Home() {
       // armazene o access e refresh token em localStorage ou em um estado global, como Redux
       setToken(access);
       setRefreshToken(refresh);
+      setUsernameCookies(username);
       router.push("/notes");
     } catch (error) {
       console.error(error);
@@ -32,8 +36,9 @@ export default function Home() {
         setError("Usuário ou senha incorretos.");
       } else {
         // Outro tipo de erro
-        setError("Não foi possível efetuar o login. Tente novamente mais tarde.");
+        setError("Houve um erro interno no servidor.Tente novamente mais tarde.");
       }
+      setTextColor("text-red-500");
     }
   };
 
@@ -53,12 +58,12 @@ export default function Home() {
       </Head>
       <div className="flex flex-col justify-center items-center h-screen w-screen bg-[url('/images/Background.jpg')] bg-no-repeat bg-center bg-cover">
         <h1 className=" text-white drop-shadow-[0_3px_2px_rgba(0,0,0,1)] font-sans font-bold md:text-6xl text-4xl pb-6">Bem-vindo!</h1>
-        <div className="md:p-20 py-10 flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
+        <div className="md:w-96 py-10 flex flex-col justify-center rounded-lg shadow-lg drop-shadow-[0_6px_6px_rgba(0,0,0,0.6)] bg-white">
           <h1 className="text-4xl md:text-5xl font-bold md:mb-8 text-blue-500">Entrar</h1>
           <form className="flex flex-col items-center gap-5 m-5" onSubmit={handleSubmit}>
             <div className="border rounded-full w-60 h-10 flex pl-3 gap-2 items-center border-black">
               <PersonOutlineIcon />
-              <input type="text" placeholder="Username" value={username} onChange={handleUsernameChange} className="focus:outline-none" />
+              <input type="text" maxLength="16" placeholder="Username" value={username} onChange={handleUsernameChange} className="focus:outline-none" />
             </div>
             <div className="border rounded-full w-60 h-10 flex pl-3 gap-2 items-center border-black">
               <LockOpenIcon />
@@ -67,7 +72,7 @@ export default function Home() {
             <button className="border rounded-full w-60 h-10 border-black text-white font-bold md:mt-5 bg-gradient-to-r from-blue-500 to-green-400 hover:from-lime-500 hover:to-cyan-500" type="submit">
               Login
             </button>
-            {error && <p className="text-red-500 font-bold">{error}</p>}
+            {error && <p className={`${textColor} font-bold break-words md:px-5`}>{error}</p>}
           </form>
           <div className="flex justify-center gap-2">
             <p>Novo aqui?</p>

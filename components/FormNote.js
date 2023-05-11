@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 function FormNote(props) {
-  const { titleText, buttonText, handleSubmit, title, setTitle, content, setContent } = props;
+  const { titleText, buttonText, handleSubmit, title, setTitle, content, setContent, message } = props;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col min-h-vh90 justify-center items-center gap-4">
@@ -22,6 +22,7 @@ function FormNote(props) {
         <label className="font-bold">Conteúdo:</label>
         <textarea defaultValue={content} maxLength="235" onChange={(e) => setContent(e.target.value)} className="focus:outline-none rounded md:w-80 w-60 pl-1 border-2 border-black" />
       </div>
+      {message && <p className="font-bold">{message}</p>}
       <button className=" text-2xl border rounded-full w-60 h-12 border-black text-white font-bold mt-5 bg-gradient-to-r from-sky-400 to-sky-600 hover:from-green-600 hover:to-lime-400" type="submit">
         {buttonText}
       </button>
