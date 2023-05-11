@@ -42,7 +42,9 @@ export default function Navbar() {
     <nav className="md:flex md:items-center md:justify-between w-full px-10 gap-10 p-3 text-white font-bold text-2xl font-handlee bg-[url('/images/Background.jpg')]">
       <div className="flex justify-between items-center ">
         <h1 className=" font-bold capitalize">{getUsernameCookies()}</h1>
-        <span onClick={dropdown}>{!showDropdown ? <MenuIcon className="text-4xl md:hidden block" /> : <CloseIcon className="text-4xl md:hidden block" />}</span>
+        <span className="md:hidden block" onClick={dropdown}>
+          {!showDropdown ? <MenuIcon className="text-4xl " /> : <CloseIcon className="text-4xl " />}
+        </span>
       </div>
       <ul
         ref={dropdownRef}
