@@ -26,10 +26,10 @@ Acesse em nosso site: https://notes-amber-tau.vercel.app/
 ### Autoria
 
 Front-end criado por:
-@Junior-dp-dev
+@ Junior-dp-dev
 
 Back-end criado por: 
-@KisarDev
+@ KisarDev
 
 ### Licença
 Este projeto está licenciado sob a Licença MIT.
