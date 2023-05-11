@@ -27,7 +27,7 @@ export default function About() {
         </div>
         <div className="flex md:flex-row md:gap-28 flex-col gap-14 py-10 justify-center text-2xl">
           <div className="flex flex-col items-center">
-            <Image className="border-2 border-black rounded-full" src="/images/Junior.jpg" alt="Foto Junior" width={200} height={200} />
+            <Image className="border-2 border-black rounded-full" src="https://avatars.githubusercontent.com/u/123782542?v=4" alt="Foto Junior" width={200} height={200} />
             <h1>Junior de Paula</h1>
             <p>{front}</p>
             <div className="flex mt-5 gap-3">
@@ -40,7 +40,7 @@ export default function About() {
             </div>
           </div>
           <div className="flex flex-col items-center">
-            <Image className="border-2 border-black rounded-full" src="/images/Cesar.jpg" alt="Foto Junior" width={213} height={213} />
+            <Image className="border-2 border-black rounded-full" src="https://avatars.githubusercontent.com/u/122934993?v=4" alt="Foto Junior" width={213} height={213} />
             <h1>César Augusto</h1>
             <p>{back}</p>
             <div className="flex mt-5 gap-3">
