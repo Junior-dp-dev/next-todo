@@ -16,12 +16,6 @@ Um aplicativo simples de lista de tarefas onde você pode criar notas com títul
 - Django Framework
 - PostgreSQL
 
-## Capturas de tela:
-
-//Página inicial do aplicativo
-
-//Adicionando uma nova tarefa
-
 ## Autoria
 
 <img align="left" width="40" height="40" src="https://avatars.githubusercontent.com/u/123782542?v=4">
@@ -34,6 +28,12 @@ Um aplicativo simples de lista de tarefas onde você pode criar notas com títul
 #### [Cesar Augusto](https://github.com/KisarDev) - Back-end
 
 </br>
+
+## Capturas de tela:
+
+![Screenshot_1](./public/images/Screenshot_1.png)
+
+![Screenshot_2](./public/images/Screenshot_2.png)
 
 ## Licença
 Este projeto está licenciado sob a Licença MIT.
