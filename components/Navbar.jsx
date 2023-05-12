@@ -43,7 +43,7 @@ export default function Navbar() {
       <div className="flex justify-between items-center ">
         <h1 className=" font-bold capitalize">{getUsernameCookies()}</h1>
         <span className="md:hidden block" onClick={dropdown}>
-          {!showDropdown ? <MenuIcon className="w-10 h-10" /> : <CloseIcon className="w-10 h-10" />}
+          {!showDropdown ? <MenuIcon style={{ width: "2.5rem", height: "2.5rem" }} /> : <CloseIcon style={{ width: "2.5rem", height: "2.5rem" }} />}
         </span>
       </div>
       <ul
