@@ -48,7 +48,7 @@ export default function Lista() {
           <h1 className=" text-5xl  font-bold">{message}</h1>
           {message === "Conclua suas notas!" && (
             <Link href={"/notes"}>
-              <CheckBoxIcon className="w-16 h-16 text-green-500" />
+              <CheckBoxIcon className="w-16 h-16 text-green-500 !important" />
             </Link>
           )}
         </div>
