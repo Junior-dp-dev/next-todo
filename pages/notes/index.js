@@ -51,7 +51,7 @@ export default function Lista() {
             <h1 className=" text-5xl  font-bold">{message}</h1>
             {message === "Crie sua primeira nota!" && (
               <Link href={"/create"}>
-                <AddCircleOutlineIcon className="text-5xl text-red-500 !important" />
+                <AddCircleOutlineIcon style={{ width: "4rem", height: "4rem" }} className="text-sky-500" />
               </Link>
             )}
           </div>
