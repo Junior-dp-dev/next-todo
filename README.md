@@ -1,4 +1,4 @@
-# Todo Notes com React e Backend Django
+# Todo Notes com Next.js e Backend Django
 
 Um aplicativo simples de lista de tarefas onde você pode criar notas com título e conteúdo, com marcação da data de criação e conclusão, pode fazer edições, remover e visualizar notas individuais.
 #### [Acesse o projeto](https://notes-amber-tau.vercel.app/) 
